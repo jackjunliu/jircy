@@ -10,3 +10,8 @@ local.properties
 
 # Macs - DS_Store
 .DS_Store
+
+# IntelliJ 
+.idea/
+
+#checking GitHub features
