@@ -1,0 +1,17 @@
+# pound sign for comments
+# input files/paths for git to automatically ignore like logs, personal configs, etc.
+
+# Gradle files 
+.gradle/
+build/
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Macs - DS_Store
+.DS_Store
+
+# IntelliJ 
+.idea/
+
+#checking GitHub features
