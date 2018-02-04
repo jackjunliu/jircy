@@ -14,4 +14,13 @@ local.properties
 # IntelliJ 
 .idea/
 
+#app dependencies
+.externalNativeBuild
+
+#gradle generated files
+.gradle/
+
+#all iml files
+*.iml
+
 #checking GitHub features
