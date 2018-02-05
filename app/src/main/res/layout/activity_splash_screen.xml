@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="example.jackliu.nonewfriends.MainActivity"
-    tools:showIn="@layout/activity_main">
+    tools:context="example.jackliu.nonewfriends.HomeSplash">
+
+    <!--Add in Post Splash Screen Media here-->
 
 </android.support.constraint.ConstraintLayout>
