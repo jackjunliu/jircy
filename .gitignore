@@ -14,4 +14,7 @@ local.properties
 # IntelliJ 
 .idea/
 
+#ignore iml files
+.iml
+
 #checking GitHub features
