@@ -14,7 +14,13 @@ local.properties
 # IntelliJ 
 .idea/
 
-#ignore iml files
-.iml
+#app dependencies
+.externalNativeBuild
+
+#gradle generated files
+.gradle/
+
+#all iml files
+*.iml
 
 #checking GitHub features
