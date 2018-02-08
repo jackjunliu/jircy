@@ -1,6 +1,7 @@
 package example.jackliu.nonewfriends;
 
 import android.content.Intent;
+import android.net.wifi.hotspot2.pps.HomeSp;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.TextView;
@@ -25,17 +26,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
         new Handler().postDelayed(new Runnable() {
             @Override
-            public void run(){
-                Intent homeIntent = new Intent (MainActivity.this, HomeSplash.class);
+            public void run() {
+                Intent homeIntent = new Intent(MainActivity.this, HomeSplash.class);
                 startActivity(homeIntent);
                 finish();
             }
 
-        },SPLASH_TIME_OUT);
+        }, SPLASH_TIME_OUT);
     }
 
     @Override
