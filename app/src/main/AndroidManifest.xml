@@ -42,6 +42,11 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps"></activity>
         <activity android:name=".HomeSplash"></activity>
+
+        <activity
+            android:name=".SignupActivity"
+            android:label="">
+        </activity>
     </application>
 
 </manifest>
