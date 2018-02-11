@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".SignupActivity">
+    tools:context=".LoginActivity">
 
     <LinearLayout
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:layout_marginBottom="30dp"
-            android:text="Sign up"
+            android:text="Login"
             android:textSize="25sp"/>
 
         <android.support.design.widget.TextInputLayout
@@ -29,15 +29,15 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/email_input"
+                android:id="@+id/email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:hint="@string/hint_email"
                 android:inputType="textEmailAddress"
                 android:imeOptions="actionNext"
-                android:maxLines="1"
-                android:textColor="@color/input_register" />
-
+                android:textColor="@color/input_login"
+                android:textColorHint="@color/input_login_hint" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -45,33 +45,30 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/password_input"
-                android:layout_width="match_parent"
+                android:id="@+id/password"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:focusableInTouchMode="true"
+                android:layout_marginBottom="10dp"
                 android:hint="@string/hint_password"
-                android:imeOptions="actionUnspecified"
                 android:inputType="textPassword"
-                android:maxLines="1"
-                android:textColor="@color/input_register" />
-
+                android:imeOptions="actionDone"
+                android:textColor="@color/input_login"
+                android:textColorHint="@color/input_login_hint" />
         </android.support.design.widget.TextInputLayout>
 
-        <!-- Sign up Button -->
+        <!-- Login Button -->
 
         <Button
-            android:id="@+id/sign_up_button"
-            style="?android:textAppearanceSmall"
-            android:layout_width="match_parent"
+            android:id="@+id/btn_login"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="20dip"
             android:background="@color/btn_login_register"
-            android:text="@string/action_sign_in_short"
-            android:textColor="@color/white"
-            android:textStyle="bold" />
+            android:text="@string/btn_login"
+            android:textColor="@color/white" />
 
         <Button
-            android:id="@+id/password_reset_button"
+            android:id="@+id/btn_reset_password"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dip"
@@ -80,22 +77,22 @@
             android:textAllCaps="false"
             android:textColor="@color/btn_login_register" />
 
-        <!-- Link to Login Screen -->
+        <!-- Link to Sign up Screen -->
 
         <Button
-            android:id="@+id/log_in_button"
+            android:id="@+id/btn_signup"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dip"
             android:background="@null"
-            android:text="@string/btn_link_to_login"
+            android:text="@string/btn_link_to_register"
             android:textAllCaps="false"
             android:textColor="@color/btn_register"
             android:textSize="15sp" />
     </LinearLayout>
 
     <ProgressBar
-        android:id="@+id/progress_bar"
+        android:id="@+id/progressBar"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_gravity="center|bottom"
