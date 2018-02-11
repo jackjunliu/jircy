@@ -21,6 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Click me for Signup Page"
+            android:onClick="goToSignup"
             tools:layout_editor_absoluteX="86dp"
             tools:layout_editor_absoluteY="259dp" />
 
@@ -32,6 +33,7 @@
             android:text="Open Map"
             android:textColor="@color/white"
             android:textStyle="bold"
+            android:onClick="goToMaps"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="360dp" />
 
