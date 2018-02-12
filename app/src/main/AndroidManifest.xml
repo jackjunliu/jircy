@@ -50,11 +50,11 @@
             android:label="@string/title_homesplash" />
         <activity
             android:name=".HomeActivity"
-            android:label="@string/title_home_activity" />
+            android:label="@string/title_home_activity">
+        </activity>
         <activity
             android:name=".SignupActivity"
             android:label="@string/app_name">
-
         </activity>
 
         <activity
