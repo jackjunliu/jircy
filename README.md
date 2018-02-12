@@ -6,7 +6,7 @@ Yoon Lee
 Jack Liu
 Irene Pattarachanyakul
 Charles Gu
-Ronald Huang
+Ronald Hoang
 </pre>
 
 Android Application for Easier Shopping
