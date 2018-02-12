@@ -2,11 +2,11 @@
 CS48 Team Project
 ## Team Members
 <pre>
-Yoon Lee
 Jack Liu
 Irene Pattarachanyakul
-Charles Gu
 Ronald Hoang
+Charles Gu
+Yoon Lee
 </pre>
 
-Android Application for Easier Shopping
+Android Application for Mass Messaging and Making Friends
