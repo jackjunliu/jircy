@@ -41,4 +41,12 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
+    public void goToSignup(View view) {
+        Intent intent = new Intent(HomeActivity.this, SignupActivity.class);
+        startActivity(intent);
+    }
+    public void goToMaps(View view){
+        Intent intent = new Intent(HomeActivity.this, MapsActivity.class);
+        startActivity(intent);
+    }
 }

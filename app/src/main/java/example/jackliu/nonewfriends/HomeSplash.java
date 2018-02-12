@@ -12,12 +12,4 @@ public class HomeSplash extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
-    public void goToSignup(View view) {
-        Intent intent = new Intent(HomeSplash.this, SignupActivity.class);
-        startActivity(intent);
-    }
-    public void goToMaps(View view){
-        Intent intent = new Intent(HomeSplash.this, MapsActivity.class);
-        startActivity(intent);
-    }
 }
