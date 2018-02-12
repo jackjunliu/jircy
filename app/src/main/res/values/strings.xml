@@ -18,5 +18,13 @@
     <string name="btn_back"><![CDATA[<< Back]]></string>
     <string name="btn_sign_out">Sign Out</string>
     <string name="lbl_forgot_password">Forgot password?</string>
+    <string name="option_get_place">Get place</string>
+    <string name="default_info_title">Default Location</string>
+    <string name="title_signup_page">Sign Up for Account</string>
+    <string name="title_homesplash">Splash</string>
+    <string name="default_info_snippet">No places found, because location permission is disabled.</string>
+    <string name="pick_place">Choose a place</string>
+    <string name="title_home_activity">Home</string>
     <string name="forgot_password_msg">We just need your registered Email Id to sent you password reset instructions.</string>
+    <string name="title_activity_maps_screen">Map</string>
 </resources>
