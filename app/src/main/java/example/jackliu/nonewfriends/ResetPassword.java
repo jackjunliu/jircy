@@ -1,5 +1,6 @@
 package example.jackliu.nonewfriends;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 
 /**
@@ -49,18 +50,21 @@ public class ResetPassword extends AppCompatActivity{
                     return;
                 }
 
-                progBar.setVisibility(View.VISIBLE);
+
                 auth.sendPasswordResetEmail(email_input)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                             public void onComplete(@NonNull Task<Void> task ) {
                                 if (task.isSuccessful()) {
                                     Toast.makeText(ResetPassword.this, "Instructions have been sent to reset your password!", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(ResetPassword.this, HomeActivity.class);
+                                    startActivity(intent);
+//                                    finish();
                                 } else {
                                     Toast.makeText(ResetPassword.this, "Failed to send reset email", Toast.LENGTH_SHORT).show();
                                 }
 
-                                progBar.setVisibility(View.GONE);
+
                         }
                         });
 
