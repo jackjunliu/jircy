@@ -14,4 +14,7 @@
     <color name="btn_login_register">#2196F3</color>
     <color name="btn_register">#0D47A1</color>
     <color name="btn_logut">#ff6861</color>
+    <color name="splash_background">#7fccb6</color>
+    <color name="splash_font">#F5FFFA</color>
+
 </resources>

@@ -45,7 +45,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v){
                 //Implement map page here
                 startActivity(new Intent(HomeActivity.this, MapsActivity.class));
-                finish();
+//                finish();
             }
         });
 
