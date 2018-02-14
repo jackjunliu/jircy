@@ -57,12 +57,12 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(HomeActivity.this);
-                alertDialogBuilder.setMessage("Would you like to destroy America?");
+                alertDialogBuilder.setMessage("Would you like some ice cream?");
 
                 alertDialogBuilder.setPositiveButton("Absolutely", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
-                        Toast.makeText(HomeActivity.this,"DONALD TRUMP IS NOW DEAD",Toast.LENGTH_LONG).show();
+                        Toast.makeText(HomeActivity.this,"You have gotten Chocolate Ice Cream!",Toast.LENGTH_LONG).show();
                     }
                 });
 
