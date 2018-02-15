@@ -54,6 +54,7 @@ public class SignupActivity extends AppCompatActivity {
         LogInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
+                startActivity(new Intent(SignupActivity.this, LoginActivity.class));
                 finish();
             }
         });
@@ -100,7 +101,8 @@ public class SignupActivity extends AppCompatActivity {
                                 Toast.makeText(SignupActivity.this, "Authentication failed." + task.getException(),
                                         Toast.LENGTH_SHORT).show();
                             } else {
-                                startActivity(new Intent(SignupActivity.this, HomeActivity.class));
+
+                                startActivity(new Intent(SignupActivity.this, LoginActivity.class));
                                 finish();
                             }
                         }
@@ -112,8 +114,10 @@ public class SignupActivity extends AppCompatActivity {
         ResetPasswordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //ResetPassword();
+                startActivity(new Intent(SignupActivity.this, ResetPassword.class));
+                //finish();
             }
+
         });
     }
 
