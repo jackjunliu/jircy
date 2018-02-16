@@ -34,25 +34,27 @@
             android:textColor="@android:color/white"
             android:textStyle="bold" />
 
-
         <Button
             android:id="@+id/notification_button"
+            style="?android:textAppearanceSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Click me for Signup Page"
-            android:onClick="goToSignup"
-            tools:layout_editor_absoluteX="86dp"
-            tools:layout_editor_absoluteY="259dp" />
+            android:layout_marginTop="16dp"
+            android:background="@color/btn_notification"
+            android:text="@string/btn_notification"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
+
 
         <Button
             android:id="@+id/open_map_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/btn_login_register"
+            android:background="@color/btn_open_map"
             android:text="Open Map"
+            android:layout_marginTop="16dp"
             android:textColor="@color/white"
             android:textStyle="bold"
-            android:onClick="goToMaps"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="360dp" />
 
