@@ -48,7 +48,6 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v){
                 //Implement map page here
                 startActivity(new Intent(HomeActivity.this, MapsActivity.class));
-//                finish();
             }
         });
 
@@ -88,7 +87,6 @@ public class HomeActivity extends AppCompatActivity {
                     // user auth state is changed - user is null
                     // launch login activity
                     startActivity(new Intent(HomeActivity.this, LoginActivity.class));
-                    finish();
                 }
             }
         };
