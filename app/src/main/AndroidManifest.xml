@@ -73,8 +73,7 @@
         <activity
             android:name=".sentMsgScreen"
             android:label="@string/title_activity_sent_msg_screen"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
-
 
 </manifest>
