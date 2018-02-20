@@ -62,6 +62,14 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        sendMsg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                startActivity(new Intent(HomeActivity.this, sendMsg.class));
+                finish();
+            }
+        });
+
         //Notification Button that makes a Popup Yes/No
         NotificationButton.setOnClickListener(new View.OnClickListener() {
             @Override
