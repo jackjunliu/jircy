@@ -54,8 +54,15 @@ public class SignupActivity extends AppCompatActivity {
         LogInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                startActivity(new Intent(SignupActivity.this, LoginActivity.class));
-                finish();
+                if(auth.getCurrentUser() != null) {
+                    //user is logged in
+                    Toast.makeText(getApplicationContext(), "Already logged in",Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else {
+                    startActivity(new Intent(SignupActivity.this, LoginActivity.class));
+                    finish();
+                }
             }
         });
 
