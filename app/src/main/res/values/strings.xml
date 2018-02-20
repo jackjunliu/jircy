@@ -28,4 +28,15 @@
     <string name="forgot_password_msg">Please enter your email address in order to reset your password.</string>
     <string name="title_activity_maps_screen">Map</string>
     <string name="btn_notification">Click me for a Notification</string>
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="default_notification_channel_name" translatable="true">News</string>
+    <string name="title_activity_message">MessageActivity</string>
+    <string name="msg_subscribed">Subscribed to new topic</string>
+    <string name="msg_token_fmt" translatable="false">InstanceID Token: %s</string>
+    <string name="quickstart_message">Click the SUBSCRIBE TO NEWS button below to subscribe to the
+        news topic. Messages sent to the news topic will be received. The LOG TOKEN button logs the
+        InstanceID token to logcat.</string>
+    <string name="subscribe_to_news">Subscribe To News</string>
+    <string name="log_token">Log Token</string>
+
 </resources>
