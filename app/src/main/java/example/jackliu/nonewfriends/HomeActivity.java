@@ -23,6 +23,7 @@ public class HomeActivity extends AppCompatActivity {
     private Button OpenMapButton, NotificationButton;
     private TextView email;
     private Button signOut;
+    private Button sendMsg;
     private FirebaseAuth.AuthStateListener authListener;
     private FirebaseAuth auth;
 
@@ -42,12 +43,27 @@ public class HomeActivity extends AppCompatActivity {
         NotificationButton = (Button) findViewById(R.id.notification_button);
         signOut = (Button) findViewById(R.id.sign_out);
         email = (TextView) findViewById(R.id.email);
+        sendMsg = (Button) findViewById(R.id.send_message_button);
 
         OpenMapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 //Implement map page here
                 startActivity(new Intent(HomeActivity.this, MapsActivity.class));
+            }
+        });
+
+        sendMsg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                startActivity(new Intent(HomeActivity.this, sendMsg.class));
+            }
+        });
+
+        sendMsg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                startActivity(new Intent(HomeActivity.this, sendMsg.class));
             }
         });
 
@@ -87,6 +103,7 @@ public class HomeActivity extends AppCompatActivity {
                     // user auth state is changed - user is null
                     // launch login activity
                     startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+                    finish();
                 }
             }
         };
@@ -121,3 +138,4 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 }
+
