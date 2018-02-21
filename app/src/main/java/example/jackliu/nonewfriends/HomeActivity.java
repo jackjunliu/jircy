@@ -50,7 +50,6 @@ public class HomeActivity extends AppCompatActivity {
             public void onClick(View v){
                 //Implement map page here
                 startActivity(new Intent(HomeActivity.this, MapsActivity.class));
-                finish();
             }
         });
 
@@ -58,7 +57,6 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 startActivity(new Intent(HomeActivity.this, sendMsg.class));
-                finish();
             }
         });
 
@@ -66,7 +64,6 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 startActivity(new Intent(HomeActivity.this, sendMsg.class));
-                finish();
             }
         });
 
