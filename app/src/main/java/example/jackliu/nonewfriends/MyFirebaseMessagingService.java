@@ -8,7 +8,6 @@ import android.content.Context;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Message;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -50,6 +49,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
             if (/* Check if data needs to be processed by long running job */ true) {
                 // For long-running tasks (10 seconds or more) use Firebase Job Dispatcher.
+                sendNotification(remoteMessage.getNotification().getBody());
                 scheduleJob();
 //                sendNotification(remoteMessage.getData().toString());
             } else {
@@ -105,7 +105,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(this, channelId)
-//                        .setSmallIcon(R.drawable.ic_stat_ic_notification)
+                        .setSmallIcon(R.drawable.ic_stat_ic_notification)
                         .setContentTitle("FCM Message")
                         .setContentText(messageBody)
                         .setAutoCancel(true)
