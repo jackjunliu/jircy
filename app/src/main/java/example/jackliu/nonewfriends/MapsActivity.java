@@ -56,7 +56,7 @@ public class MapsActivity extends AppCompatActivity
 
     // A default location (Sydney, Australia) and default zoom to use when location permission is
     // not granted.
-    private final LatLng mDefaultLocation = new LatLng(-33.8523341, 151.2106085);
+    private final LatLng mDefaultLocation = new LatLng(34.435829, -119.827639);
     private static final int DEFAULT_ZOOM = 15;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     private boolean mLocationPermissionGranted;
@@ -203,6 +203,14 @@ public class MapsActivity extends AppCompatActivity
         getDeviceLocation();
     }
 
+    private void putMarkers(){
+        if (mLastKnownLocation != null) {
+            LatLng gps = new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude());
+            mMap.addMarker(new MarkerOptions().position(gps).title("Current Location"));
+        }
+            mMap.addMarker(new MarkerOptions().position(mDefaultLocation).title("Test_Stub_1"));
+    }
+
     /**
      * Gets the current location of the device, and positions the map's camera.
      */
@@ -220,6 +228,7 @@ public class MapsActivity extends AppCompatActivity
                         if (task.isSuccessful() && task.getResult() != null) {
                             // Set the map's camera position to the current location of the device.
                             mLastKnownLocation = task.getResult();
+                            putMarkers();
                             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
                                     new LatLng(mLastKnownLocation.getLatitude(),
                                             mLastKnownLocation.getLongitude()), DEFAULT_ZOOM));
