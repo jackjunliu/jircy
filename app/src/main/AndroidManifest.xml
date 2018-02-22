@@ -74,6 +74,12 @@
             android:label="@string/app_name">
 
         </activity>
+
+        <activity
+            android:name=".MainInterest"
+            android:label="No New Friends">
+
+        </activity>
     </application>
 
 </manifest>

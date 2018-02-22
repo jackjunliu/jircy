@@ -25,6 +25,7 @@ public class HomeActivity extends AppCompatActivity {
     private Button signOut;
     private FirebaseAuth.AuthStateListener authListener;
     private FirebaseAuth auth;
+    private Button InterestButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,7 @@ public class HomeActivity extends AppCompatActivity {
         NotificationButton = (Button) findViewById(R.id.notification_button);
         signOut = (Button) findViewById(R.id.sign_out);
         email = (TextView) findViewById(R.id.email);
+        InterestButton = (Button) findViewById(R.id.interests_button);
 
         OpenMapButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +52,14 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(new Intent(HomeActivity.this, MapsActivity.class));
             }
         });
+
+        InterestButton.setOnClickListener(new View.OnClickListener() {
+                                              @Override
+                                              public void onClick(View v) {
+                                                  startActivity(new Intent(HomeActivity.this, MainInterest.class));
+                                              }
+                                          });
+
 
         //Notification Button that makes a Popup Yes/No
         NotificationButton.setOnClickListener(new View.OnClickListener() {
