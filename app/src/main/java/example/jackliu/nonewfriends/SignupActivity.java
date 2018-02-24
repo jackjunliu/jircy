@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -97,23 +98,27 @@ public class SignupActivity extends AppCompatActivity {
                 //show progress bar
                 progBar.setVisibility(View.VISIBLE);
 
-                //authenticate user through firebase
+                //create account on firebase console
                 auth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(SignupActivity.this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            Toast.makeText(SignupActivity.this, "createUserWithEmail:onComplete:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
-                            progBar.setVisibility(View.GONE);
-                            if (!task.isSuccessful()) {
-                                Toast.makeText(SignupActivity.this, "Authentication failed." + task.getException(),
-                                        Toast.LENGTH_SHORT).show();
-                            } else {
-
-                                startActivity(new Intent(SignupActivity.this, LoginActivity.class));
-                                finish();
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                //Toast.makeText(SignupActivity.this, "createUserWithEmail:onComplete:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
+                                progBar.setVisibility(View.GONE);
+                                if (!task.isSuccessful()) {
+                                    Toast.makeText(SignupActivity.this, "Account already exists",
+                                            Toast.LENGTH_SHORT).show();
+                                    return;
+                                } else {
+                                    //sign up successful
+                                    startActivity(new Intent(SignupActivity.this, LoginActivity.class));
+                                    finish();
+                                }
                             }
-                        }
                         });
+
+
+
             }
         });
 
@@ -133,6 +138,7 @@ public class SignupActivity extends AppCompatActivity {
         super.onResume();
         progBar.setVisibility(View.GONE);
     }
+
 
 
 }
