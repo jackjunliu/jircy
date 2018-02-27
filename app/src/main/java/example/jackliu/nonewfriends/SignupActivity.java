@@ -111,7 +111,7 @@ public class SignupActivity extends AppCompatActivity {
                                     return;
                                 } else {
                                     //sign up successful
-                                    startActivity(new Intent(SignupActivity.this, LoginActivity.class));
+                                    startActivity(new Intent(SignupActivity.this, VerifyActivity.class));
                                     finish();
                                 }
                             }

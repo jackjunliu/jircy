@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity{
 
@@ -38,10 +39,12 @@ public class LoginActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
 
-        if (auth.getCurrentUser() != null) {
+        if (auth.getCurrentUser() != null && user.isEmailVerified()) {
             startActivity(new Intent(LoginActivity.this, HomeActivity.class));
         }
 
@@ -109,15 +112,32 @@ public class LoginActivity extends AppCompatActivity{
                                         Toast.makeText(LoginActivity.this, getString(R.string.auth_failed), Toast.LENGTH_LONG).show();
                                     }
                                 } else {
-                                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                                    startActivity(intent);
-                                    finish();
+                                    checkVerification();
+
                                 }
                             }
                         });
             }
         });
     }
+
+        private void checkVerification() {
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+            if (user.isEmailVerified()) {
+                //user is verified,
+                //Toast.makeText(VerifyActivity.this, "Successfully verified", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                startActivity(intent);
+                finish();
+
+            } else {
+                //email is not verified
+                Toast.makeText(LoginActivity.this, "Invalid email", Toast.LENGTH_SHORT).show();
+                return;
+            }
+        }
 
 
 }

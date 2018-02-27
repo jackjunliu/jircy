@@ -28,10 +28,10 @@ public class VerifyActivity extends AppCompatActivity {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     //get firebase auth instance
-    FirebaseAuth auth = FirebaseAuth.getInstance();
+    private FirebaseAuth auth = FirebaseAuth.getInstance();
 
     private TextView email;
-    private Button SignOut, Verify, SendEmail;
+    private Button SendEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,18 +39,10 @@ public class VerifyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_verify);
 
         email = (TextView) findViewById(R.id.email);
-        SignOut = (Button) findViewById(R.id.sign_out);
-        Verify = (Button) findViewById(R.id.verify_button);
+
         SendEmail = (Button) findViewById(R.id.send_email_button);
 
         email.setText(user.getEmail());
-
-        SignOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                auth.signOut();
-            }
-        });
 
         SendEmail.setOnClickListener(new View.OnClickListener() {
                                          @Override
@@ -62,6 +54,8 @@ public class VerifyActivity extends AppCompatActivity {
                                                              if (task.isSuccessful()) {
                                                                  //email is sent to verify
                                                                  Toast.makeText(VerifyActivity.this, "An email is sent to user's email address", Toast.LENGTH_SHORT).show();
+                                                                 startActivity(new Intent(VerifyActivity.this, LoginActivity.class));
+                                                                 finish();
                                                                  return;
                                                              } else {
                                                                  //email not sent
@@ -74,27 +68,10 @@ public class VerifyActivity extends AppCompatActivity {
                                          }
                                      });
 
-        Verify.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (user.isEmailVerified()) {
-                    //user is verified,
-                    //Toast.makeText(VerifyActivity.this, "Successfully verified", Toast.LENGTH_SHORT).show();
-
-                    //Take to log in page
-                    startActivity(new Intent(VerifyActivity.this, LoginActivity.class));
-                    finish();
-
-
-                } else {
-                    //email is not verified
-                    Toast.makeText(VerifyActivity.this, "Invalid email", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-            }
-        });
 
     }
+
+
 }
 
 //mStatusTextView.setText(getString(R.string.emailpassword_status_fmt, user.getEmail(), user.isEmailVerified()));
