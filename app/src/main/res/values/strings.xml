@@ -43,8 +43,19 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_maps_hybrid">MapsHybrid</string>
 
+    <string name="title_activity_send_msg">sendMsg</string>
+    <string name="sentMessg">Sent Message</string>
+    <string name="button_send">send</string>
+    <string name="settings_drinking">Drinking</string>
+    <string name="settings_boardgames">Boardgames</string>
+    <string name="settings_sports">Sports</string>
+    <string name="settings_videogames">Videogames</string>
+    <string name="settings_studying">Studying</string>
+    <string name="settings_eating">Eating</string>
+    <string name="edit_message">Enter a Message</string>
+    <string name="title_activity_sent_msg_screen">sentMsgScreen</string>
+    <string name="send_msg_button">Send a Message</string>
 </resources>
