@@ -3,6 +3,7 @@ package example.jackliu.nonewfriends;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +28,9 @@ public class HomeActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener authListener;
     private FirebaseAuth auth;
 
+    private static final String TAG = "HomeActivity";
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +53,10 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 //Implement map page here
+//                WebView view = new WebView(HomeActivity.this);
+//                view.getSettings().setJavaScriptEnabled(true);
+//                view.loadUrl("file:///android_asset/index.html");
+//                setContentView(view);
                 startActivity(new Intent(HomeActivity.this, MapsActivity.class));
             }
         });
