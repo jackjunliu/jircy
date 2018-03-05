@@ -29,20 +29,15 @@
       /**
       * Data object to be written to Firebase.
       */
-      var data = {
-        sender: null,
-        timestamp: null,
-        lat: null,
-        lng: null
-      };
+      var das
 
       /**
       * User's current location. Default values are set.
       */
-      var pos = {
-        lat: 34.413963, 
-        lng: -119.848946
-      };
+      // var pos = {
+      //   lat: 34.413963, 
+      //   lng: -119.848946
+      // };
 
       var map;
 
@@ -69,32 +64,32 @@
       }
 
       //HTML geolocation
-      function getLocation() {
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function(position) {
-            pos = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
-            };
-            infoWindow.setPosition(pos);
-            infoWindow.setContent('Location found.');
-            map.setCenter(pos);
-          }, function() {
-            handleLocationError(true, infoWindow, map.getCenter());
-          });
-        } else {
-          // Browser doesn't support Geolocation
-          handleLocationError(false, infoWindow, map.getCenter());
-        }
-      }
+      // function getLocation() {
+      //   if (navigator.geolocation) {
+      //     navigator.geolocation.getCurrentPosition(function(position) {
+      //       pos = {
+      //         lat: position.coords.latitude,
+      //         lng: position.coords.longitude
+      //       };
+      //       infoWindow.setPosition(pos);
+      //       infoWindow.setContent('Location found.');
+      //       map.setCenter(pos);
+      //     }, function() {
+      //       handleLocationError(true, infoWindow, map.getCenter());
+      //     });
+      //   } else {
+      //     // Browser doesn't support Geolocation
+      //     handleLocationError(false, infoWindow, map.getCenter());
+      //   }
+      // }
 
-      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-        infoWindow.setPosition(pos);
-        infoWindow.setContent(browserHasGeolocation ?
-                              'Error: The Geolocation service failed.' :
-                              'Error: Your browser doesn\'t support geolocation.');
-        infoWindow.open(map);
-      }
+      // function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+      //   infoWindow.setPosition(pos);
+      //   infoWindow.setContent(browserHasGeolocation ?
+      //                         'Error: The Geolocation service failed.' :
+      //                         'Error: Your browser doesn\'t support geolocation.');
+      //   infoWindow.open(map);
+      // }
 
       /**
       * Starting point for running the program. Authenticates the user.
@@ -109,7 +104,8 @@
        */
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 34.413963, lng: -119.848946},
+          // center: {lat: 34.413963, lng: -119.848946},
+          center: {lat: 0, lng: 0},
           zoom: 5,
           styles: [{
             featureType: 'poi',
@@ -126,7 +122,7 @@
 
 
 
-        getLocation();
+        // getLocation();
         // Create the DIV to hold the control and call the makeInfoBox() constructor
         // passing in this DIV.
         var infoBoxDiv = document.createElement('div');
@@ -134,11 +130,11 @@
         map.controls[google.maps.ControlPosition.TOP_CENTER].push(infoBoxDiv);
 
         //stubbed sender. yet to figure out how to get it...
-        data.sender = 'Yoon';
-        data.lat = pos.lat;
-        data.lng = pos.lng;
+        // data.sender = 'Yoon';
+        // data.lat = pos.lat;
+        // data.lng = pos.lng;
 
-        addToFirebase(pos);
+        // addToFirebase(pos);
 
         // Create a heatmap.
         var heatmap = new google.maps.visualization.HeatmapLayer({
@@ -164,7 +160,7 @@
         var clicks = firebase.child('location');
 
         // Listener for when a click is added.
-        clicks.orderByChild('timestamp').startAt(startTime).on('child_added',
+        clicks.orderByChild('timestamp').on('child_changed',
           function(snapshot) {
 
             // Get that click from firebase.
@@ -173,7 +169,13 @@
             var elapsed = new Date().getTime() - newPosition.timestamp;
 
             // Add the point to  the heatmap.
-            heatmap.getData().push(point);
+            // heatmap.getData().push(point);
+
+            var marker = new google.maps.Marker({
+              position: {lat: newPosition.lat, lng: newPosition.lng},
+              map: map,
+              title: newPosition.sender
+            });
 
             // Requests entries older than expiry time (20 minutes).
             var expirySeconds = Math.max(60 * 20 * 1000 - elapsed, 0);
@@ -202,42 +204,42 @@
        *     this function is called with the current timestamp to add the
        *     click to the firebase.
        */
-      function getTimestamp(addLocation) {
-        // Reference to location for saving the last click time.
-        var ref = firebase.child('last_message/' + data.sender);
+      // function getTimestamp(addLocation) {
+      //   // Reference to location for saving the last click time.
+      //   var ref = firebase.child('last_message/' + data.sender);
 
-        ref.onDisconnect().remove();  // Delete reference from firebase on disconnect.
+      //   ref.onDisconnect().remove();  // Delete reference from firebase on disconnect.
 
-        // Set value to timestamp.
-        ref.set(Firebase.ServerValue.TIMESTAMP, function(err) {
-          if (err) {  // Write to last message was unsuccessful.
-            console.log(err);
-          } else {  // Write to last message was successful.
-            ref.once('value', function(snap) {
-              addLocation(snap.val());  // Add click with same timestamp.
-            }, function(err) {
-              console.warn(err);
-            });
-          }
-        });
-      }
+      //   // Set value to timestamp.
+      //   ref.set(Firebase.ServerValue.TIMESTAMP, function(err) {
+      //     if (err) {  // Write to last message was unsuccessful.
+      //       console.log(err);
+      //     } else {  // Write to last message was successful.
+      //       ref.once('value', function(snap) {
+      //         addLocation(snap.val());  // Add click with same timestamp.
+      //       }, function(err) {
+      //         console.warn(err);
+      //       });
+      //     }
+      //   });
+      // }
 
       /**
        * Adds a click to firebase.
        * @param {Object} data The data to be added to firebase.
        *     It contains the lat, lng, sender and timestamp.
        */
-      function addToFirebase(data) {
-        getTimestamp(function(timestamp) {
-          // Add the new timestamp to the record data.
-          data.timestamp = timestamp;
-          var ref = firebase.child('location').push(data, function(err) {
-            if (err) {  // Data was not written to firebase.
-              console.warn(err);
-            }
-          });
-        });
-      }
+      // function addToFirebase(data) {
+      //   getTimestamp(function(timestamp) {
+      //     // Add the new timestamp to the record data.
+      //     data.timestamp = timestamp;
+      //     var ref = firebase.child('location').push(data, function(err) {
+      //       if (err) {  // Data was not written to firebase.
+      //         console.warn(err);
+      //       }
+      //     });
+      //   });
+      // }
     </script>
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJTmEpgPZOc3xbVIaROA1-b0HXJ5xOhkw&libraries=visualization&callback=initMap">
