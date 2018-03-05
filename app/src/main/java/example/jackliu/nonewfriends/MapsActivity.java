@@ -46,7 +46,7 @@ public class MapsActivity
 //        implements OnMapReadyCallback
 {
 
-//    private static final String TAG = MapsActivity.class.getSimpleName();
+    //    private static final String TAG = MapsActivity.class.getSimpleName();
 //    private GoogleMap mMap;
 //    private CameraPosition mCameraPosition;
 //

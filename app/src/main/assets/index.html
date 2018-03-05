@@ -20,6 +20,7 @@
 
     <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
     <script>
+
       /**
       * Reference to Firebase database.
       * @const
@@ -57,6 +58,50 @@
         controlText.textContent = 'The map shows all clicks made in the last 10 minutes.';
         controlUI.appendChild(controlText);
       }
+
+
+      //HTML geolocation
+      var x = document.getElementById("demo");
+      function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+      }
+      }
+      function showPosition(position) {
+      x.innerHTML = "Latitude: " + position.coords.latitude +
+      "<br>Longitude: " + position.coords.longitude;
+      }
+
+      //catch error
+      function showError(error) {
+      switch(error.code) {
+        case error.PERMISSION_DENIED:
+            x.innerHTML = "User denied the request for Geolocation."
+            break;
+        case error.POSITION_UNAVAILABLE:
+            x.innerHTML = "Location information is unavailable."
+            break;
+        case error.TIMEOUT:
+            x.innerHTML = "The request to get user location timed out."
+            break;
+        case error.UNKNOWN_ERROR:
+            x.innerHTML = "An unknown error occurred."
+            break;
+        }
+      }
+
+      //show location
+      function showPosition(position) {
+      var latlon = position.coords.latitude + "," + position.coords.longitude;
+
+      var img_url = "https://maps.googleapis.com/maps/api/staticmap?center=
+      "+latlon+"&zoom=14&size=400x300&sensor=false&key=YOUR_:KEY";
+
+      document.getElementById("mapholder").innerHTML = "<img src='"+img_url+"'>";
+      }
+
 
       /**
       * Starting point for running the program. Authenticates the user.
@@ -152,15 +197,15 @@
         );
 
         // Remove old data from the heatmap when a point is removed from firebase.
-        clicks.on('child_removed', function(snapshot, prevChildKey) {
-          var heatmapData = heatmap.getData();
-          var i = 0;
-          while (snapshot.val().lat != heatmapData.getAt(i).lat()
-            || snapshot.val().lng != heatmapData.getAt(i).lng()) {
-            i++;
-          }
-          heatmapData.removeAt(i);
-        });
+        //clicks.on('child_removed', function(snapshot, prevChildKey) {
+          //var heatmapData = heatmap.getData();
+          //var i = 0;
+          //while (snapshot.val().lat != heatmapData.getAt(i).lat()
+            //|| snapshot.val().lng != heatmapData.getAt(i).lng()) {
+            //i++;
+          //}
+          //heatmapData.removeAt(i);
+        //});
       }
 
       /**
@@ -205,6 +250,8 @@
           });
         });
       }
+
+
     </script>
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJTmEpgPZOc3xbVIaROA1-b0HXJ5xOhkw&libraries=visualization&callback=initMap">
