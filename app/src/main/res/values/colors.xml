@@ -18,6 +18,7 @@
     <color name="btn_notification">#111111</color>
     <color name="splash_background">#7fccb6</color>
     <color name="splash_font">#F5FFFA</color>
+    <color name="colorTransparent">#80000000</color>
 
     <color name="black_overlay">#66000000</color>
 </resources>
