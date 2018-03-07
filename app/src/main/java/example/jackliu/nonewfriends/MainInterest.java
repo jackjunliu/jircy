@@ -18,7 +18,7 @@ import android.support.annotation.NonNull;
 
 public class MainInterest extends AppCompatActivity {
     private TextView choose;
-
+    private Button saveButton;
     private CheckBox drinkBox, sportBox, boardBox, videoBox, studyBox, eatBox;
 
     @Override

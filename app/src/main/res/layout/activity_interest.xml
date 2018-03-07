@@ -27,7 +27,7 @@
         android:layout_height="36dp"
         android:text="Board Games"
         tools:layout_editor_absoluteX="56dp"
-        tools:layout_editor_absoluteY="417dp" />
+        tools:layout_editor_absoluteY="397dp" />
 
     <CheckBox
         android:id="@+id/act_video"
@@ -51,13 +51,21 @@
         android:layout_height="wrap_content"
         android:text="Eating"
         tools:layout_editor_absoluteX="247dp"
-        tools:layout_editor_absoluteY="417dp" />
+        tools:layout_editor_absoluteY="397dp" />
 
     <TextView
         android:id="@+id/txt_interest"
-        android:layout_width="220dp"
-        android:layout_height="51dp"
+        android:layout_width="221dp"
+        android:layout_height="79dp"
         android:text="Choose your interests!"
-        tools:layout_editor_absoluteX="95dp"
-        tools:layout_editor_absoluteY="39dp" />
+        tools:layout_editor_absoluteX="138dp"
+        tools:layout_editor_absoluteY="52dp" />
+
+    <Button
+        android:id="@+id/save_button"
+        android:layout_width="219dp"
+        android:layout_height="73dp"
+        android:text="SAVE CHANGES"
+        tools:layout_editor_absoluteX="96dp"
+        tools:layout_editor_absoluteY="491dp" />
 </android.support.constraint.ConstraintLayout>

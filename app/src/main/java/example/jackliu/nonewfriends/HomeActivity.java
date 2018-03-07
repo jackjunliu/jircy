@@ -23,6 +23,7 @@ public class HomeActivity extends AppCompatActivity {
     private Button OpenMapButton, NotificationButton;
     private TextView email;
     private Button signOut;
+    private Button sendMsg;
     private FirebaseAuth.AuthStateListener authListener;
     private FirebaseAuth auth;
     private Button InterestButton;
@@ -44,6 +45,7 @@ public class HomeActivity extends AppCompatActivity {
         signOut = (Button) findViewById(R.id.sign_out);
         email = (TextView) findViewById(R.id.email);
         InterestButton = (Button) findViewById(R.id.interests_button);
+        sendMsg = (Button) findViewById(R.id.send_message_button);
 
         OpenMapButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +62,19 @@ public class HomeActivity extends AppCompatActivity {
                                               }
                                           });
 
+        sendMsg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                startActivity(new Intent(HomeActivity.this, sendMsg.class));
+            }
+        });
+
+        sendMsg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                startActivity(new Intent(HomeActivity.this, sendMsg.class));
+            }
+        });
 
         //Notification Button that makes a Popup Yes/No
         NotificationButton.setOnClickListener(new View.OnClickListener() {
@@ -97,6 +112,7 @@ public class HomeActivity extends AppCompatActivity {
                     // user auth state is changed - user is null
                     // launch login activity
                     startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+                    finish();
                 }
             }
         };
@@ -131,3 +147,4 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 }
+

@@ -11,6 +11,7 @@
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the 'MyLocation' functionality.
     -->
+
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -25,8 +26,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -44,31 +44,25 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps" >
-        </activity>
+            android:label="@string/title_activity_maps" />
         <activity
             android:name=".HomeActivity"
-            android:label="@string/title_home_activity">
-        </activity>
+            android:label="@string/title_home_activity" />
         <activity
             android:name=".SignupActivity"
-            android:label="@string/app_name" >
-        </activity>
-
+            android:label="@string/app_name" />
         <activity
             android:name=".ResetPassword"
-            android:label="@string/app_name">
-        </activity>
-
+            android:label="@string/app_name" />
         <activity
             android:name=".SplashScreen"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_name">
@@ -80,6 +74,16 @@
             android:label="No New Friends">
 
         </activity>
+
+        <activity
+            android:name=".sendMsg"
+            android:label="@string/title_activity_send_msg"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".sentMsgScreen"
+            android:label="@string/title_activity_sent_msg_screen"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
+
 
 </manifest>
