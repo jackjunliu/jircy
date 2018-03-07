@@ -27,6 +27,7 @@ public class HomeActivity extends AppCompatActivity {
     private Button sendMsg;
     private FirebaseAuth.AuthStateListener authListener;
     private FirebaseAuth auth;
+    private Button InterestButton;
 
     private static final String TAG = "HomeActivity";
 
@@ -47,6 +48,7 @@ public class HomeActivity extends AppCompatActivity {
         NotificationButton = (Button) findViewById(R.id.notification_button);
         signOut = (Button) findViewById(R.id.sign_out);
         email = (TextView) findViewById(R.id.email);
+        InterestButton = (Button) findViewById(R.id.interests_button);
         sendMsg = (Button) findViewById(R.id.send_message_button);
 
         OpenMapButton.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +62,13 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(new Intent(HomeActivity.this, MapsActivity.class));
             }
         });
+
+        InterestButton.setOnClickListener(new View.OnClickListener() {
+                                              @Override
+                                              public void onClick(View v) {
+                                                  startActivity(new Intent(HomeActivity.this, MainInterest.class));
+                                              }
+                                          });
 
         sendMsg.setOnClickListener(new View.OnClickListener() {
             @Override
