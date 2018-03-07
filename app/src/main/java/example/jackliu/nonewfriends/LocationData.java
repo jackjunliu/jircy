@@ -1,5 +1,6 @@
 package example.jackliu.nonewfriends;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.IgnoreExtraProperties;
 
 /**
@@ -34,6 +35,10 @@ public class LocationData {
     public LocationData timestamp(long timestamp) {
         this.timestamp = timestamp;
         return this;
+    }
+
+    public LatLng convertLatLng() {
+        return new LatLng(lat,lng);
     }
 
     public String getSender() {
