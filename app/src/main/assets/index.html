@@ -95,9 +95,9 @@
        */
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
-          // center: {lat: 34.413963, lng: -119.848946},
-          center: {lat: 0, lng: 0},
-          zoom: 5,
+          center: {lat: 34.413963, lng: -119.848946},
+          //center: {lat: 0, lng: 0},
+          zoom: 4,
           styles: [{
             featureType: 'poi',
             stylers: [{ visibility: 'off' }]  // Turn off POI.
@@ -127,15 +127,15 @@
           map: map,
           radius: 16
         });
-        console.log("initMap ending with initAuthentication");
-        initAuthentication(initFirebase.bind(undefined, heatmap));
+        //console.log("initMap ending with initAuthentication");
+        //initAuthentication(initFirebase.bind(undefined, heatmap));
       }
       /**
        * Set up a Firebase with deletion on locations older than expirySeconds
        * @param {!google.maps.visualization.HeatmapLayer} heatmap The heatmap to
        * which points are added from Firebase.
        */
-      function initFirebase(heatmap) {
+      function initFirebase(map) {
         // 20 minutes before current time.
         var startTime = new Date().getTime() - (60 * 20 * 1000);
         // Reference to the clicks in Firebase.
@@ -147,13 +147,17 @@
             var newPosition = snapshot.val();
             var point = new google.maps.LatLng(newPosition.lat, newPosition.lng);
             var elapsed = new Date().getTime() - newPosition.timestamp;
+
             // Add the point to  the heatmap.
-            // heatmap.getData().push(point);
+            map.getData().push(point);
+
             var marker = new google.maps.Marker({
               position: {lat: newPosition.lat, lng: newPosition.lng},
               map: map,
               title: newPosition.sender
             });
+
+
             // Requests entries older than expiry time (20 minutes).
             var expirySeconds = Math.max(60 * 20 * 1000 - elapsed, 0);
             // Set client timeout to remove the point after a certain time.

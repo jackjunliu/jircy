@@ -90,10 +90,13 @@ public class MapsActivity extends AppCompatActivity {
             mLastKnownLocation = savedInstanceState.getParcelable(KEY_LOCATION);
         }
         // Construct a FusedLocationProviderClient.
+        // Manages underlying location technologies, such as GPS and Wifi. can request best accuracy possible w/o energy consumption
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
 
+        //Used for receiving notifications from the FusedLocationProviderApi when the device location has changed or can no longer be determined.
         mLocationCallback = new LocationCallback() {
             @Override
+            //
             public void onLocationResult(LocationResult locationResult) {
                 for (Location location : locationResult.getLocations()) {
                     firedb.addLocation(location);
@@ -101,35 +104,6 @@ public class MapsActivity extends AppCompatActivity {
             }
         };
     }
-
-    /**
-     * Gets the current location of the device, and positions the map's camera.
-     */
-//    private void getDeviceLocation() {
-//        /*
-//         * Get the best and most recent location of the device, which may be null in rare
-//         * cases when a location is not available.
-//         */
-//        try {
-//            if (mLocationPermissionGranted) {
-//                Task<Location> locationResult = mFusedLocationProviderClient.getLastLocation();
-//                locationResult.addOnCompleteListener(this, new OnCompleteListener<Location>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<Location> task) {
-//                        if (task.isSuccessful() && task.getResult() != null) {
-//                            // Set the map's camera position to the current location of the device.
-//                            mLastKnownLocation = task.getResult();
-//                        } else {
-//                            Log.d(TAG, "Current location is null. Using defaults.");
-//                            Log.e(TAG, "Exception: %s", task.getException());
-//                        }
-//                    }
-//                });
-//            }
-//        } catch (SecurityException e) {
-//            Log.e("Exception: %s", e.getMessage());
-//        }
-//    }
 
 
     /**
