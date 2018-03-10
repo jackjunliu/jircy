@@ -23,7 +23,7 @@ android {
                 cppFlags ""
             }
         }
-        manifestPlaceholders = [onesignal_app_id: "c9cf3c94-40f2-4f67-aeeb-e83db45aa5f6",
+        manifestPlaceholders = [onesignal_app_id: "6675845e-0d11-4761-a749-9cb4457c75f6",
                                 // Project number pulled from dashboard, local value is ignored.
                                 onesignal_google_project_number: "REMOTE"]
     }

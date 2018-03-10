@@ -1,19 +1,23 @@
 package example.jackliu.nonewfriends;
 
-import android.os.AsyncTask;
-import android.os.Bundle;
-import android.os.StrictMode;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.os.AsyncTask;
 import android.os.Build;
+import android.os.Bundle;
+import android.os.StrictMode;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.ProviderQueryResult;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.onesignal.OSNotification;
@@ -28,8 +32,16 @@ public class MessageActivity extends AppCompatActivity {
 
     private static final String TAG = "MessageActivity";
 
+    //declare firebase variable
+    private FirebaseAuth auth;
+
+    private EditText sendRecipient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        sendRecipient = (EditText) findViewById(R.id.send_email_input);
+        auth = FirebaseAuth.getInstance();
+
         super.onCreate(savedInstanceState);
         OneSignal.startInit(this)
                 .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
@@ -96,9 +108,37 @@ public class MessageActivity extends AppCompatActivity {
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendMessage();
+                emailCheck(v);
+//                sendMessage();
             }
         });
+    }
+    public void emailCheck(View v) {
+        String email = sendRecipient.getText().toString();
+
+//        //check if email field is empty
+//        if (TextUtils.isEmpty(email)) {
+//            //throw a msg
+//            Toast.makeText(getApplicationContext(), "Please enter target email address to send", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
+
+        auth.fetchProvidersForEmail(email)
+                .addOnCompleteListener(new OnCompleteListener<ProviderQueryResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<ProviderQueryResult> task) {
+                        boolean check = !task.getResult().getProviders().isEmpty();
+
+                        if (!check) {
+                            Toast.makeText(MessageActivity.this, "Email does not exist",
+                                    Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(MessageActivity.this, "Email exists!",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
     }
     private void sendMessage() {
         AsyncTask.execute(new Runnable() {
