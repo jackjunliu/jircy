@@ -14,6 +14,7 @@ import android.support.annotation.NonNull;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.onesignal.OneSignal;
 
 /**
  * Created by jackliu on 2/7/18.
@@ -35,6 +36,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         //get firebase auth instance
         auth = FirebaseAuth.getInstance();
