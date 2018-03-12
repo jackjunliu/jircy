@@ -112,7 +112,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String previousChildName) {
                 changeMarkerToMap(dataSnapshot);
-             }
+            }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
