@@ -173,7 +173,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             return;
         } else {
             Log.i(TAG, "changeMarkerToMap: changing marker's location...");
-            userMap.get(loc).setPosition(loc.convertLatLng());
+            userMap.get(loc.getSender()).setPosition(loc.convertLatLng());
         }
     }
 

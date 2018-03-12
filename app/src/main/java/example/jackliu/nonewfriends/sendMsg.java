@@ -14,9 +14,6 @@ public class sendMsg extends AppCompatActivity {
         setContentView(R.layout.message_page);
         sendbutton = (Button) findViewById(R.id.sendButton) ;
 
-
-
-
         sendbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
