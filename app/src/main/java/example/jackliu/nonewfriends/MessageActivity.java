@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -28,6 +29,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
+
+
 public class MessageActivity extends AppCompatActivity {
 
     private static final String TAG = "MessageActivity";
@@ -35,11 +38,13 @@ public class MessageActivity extends AppCompatActivity {
     //declare firebase variable
     private FirebaseAuth auth;
 
-    private EditText sendRecipient;
+    private EditText SendRecipient;
+
+    private Button sendButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        sendRecipient = (EditText) findViewById(R.id.send_email_input);
+        //get firebase instance
         auth = FirebaseAuth.getInstance();
 
         super.onCreate(savedInstanceState);
@@ -104,43 +109,20 @@ public class MessageActivity extends AppCompatActivity {
             }
         });
 
-        Button sendButton = findViewById(R.id.send_notification);
+        sendButton = findViewById(R.id.send_notification);
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                emailCheck(v);
-//                sendMessage();
+                SendRecipient = (EditText) findViewById(R.id.send_email_input);
+                //Testing if toast works
+                //Toast.makeText(MessageActivity.this, msg, Toast.LENGTH_SHORT).show();
+                String msg = SendRecipient.getText().toString();
+                emailCheck(msg);
+                sendMessage(msg);
             }
         });
     }
-    public void emailCheck(View v) {
-        String email = sendRecipient.getText().toString();
-
-//        //check if email field is empty
-//        if (TextUtils.isEmpty(email)) {
-//            //throw a msg
-//            Toast.makeText(getApplicationContext(), "Please enter target email address to send", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-
-        auth.fetchProvidersForEmail(email)
-                .addOnCompleteListener(new OnCompleteListener<ProviderQueryResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<ProviderQueryResult> task) {
-                        boolean check = !task.getResult().getProviders().isEmpty();
-
-                        if (!check) {
-                            Toast.makeText(MessageActivity.this, "Email does not exist",
-                                    Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(MessageActivity.this, "Email exists!",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-
-    }
-    private void sendMessage() {
+    private void sendMessage(final String msg) {
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
@@ -151,8 +133,13 @@ public class MessageActivity extends AppCompatActivity {
                     StrictMode.setThreadPolicy(policy);
                     String send_email;
 
-                    //Sends message to yourself, use other email address to send it to someone else's phone
-                    send_email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+                    //Tests if email exists, if it does, then sends notification to email owner.
+                    Log.d(TAG, msg);
+                    if (TextUtils.isEmpty(msg)) {
+                        Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    send_email = msg;
 
                     try {
                         String jsonResponse;
@@ -208,5 +195,25 @@ public class MessageActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void emailCheck(final String msg) {
+
+        auth.fetchProvidersForEmail(msg)
+                .addOnCompleteListener(new OnCompleteListener<ProviderQueryResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<ProviderQueryResult> task) {
+                        boolean check = !task.getResult().getProviders().isEmpty();
+
+                        if (!check) {
+                            Toast.makeText(getApplicationContext(), "Email does not exist",
+                                    Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Email exists!",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
     }
 }
