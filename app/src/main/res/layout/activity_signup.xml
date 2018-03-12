@@ -90,7 +90,7 @@
             android:background="@null"
             android:text="@string/btn_link_to_login"
             android:textAllCaps="false"
-            android:textColor="@color/btn_register"
+            android:textColor="@color/btn_open_map"
             android:textSize="15sp" />
     </LinearLayout>
 
