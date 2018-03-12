@@ -51,11 +51,6 @@ public class HomeActivity extends AppCompatActivity {
         OpenMapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                //Implement map page here
-//                WebView view = new WebView(HomeActivity.this);
-//                view.getSettings().setJavaScriptEnabled(true);
-//                view.loadUrl("file:///android_asset/index.html");
-//                setContentView(view);
                 startActivity(new Intent(HomeActivity.this, MapsActivity.class));
             }
         });
