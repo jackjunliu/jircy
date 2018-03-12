@@ -9,10 +9,12 @@ import android.app.NotificationManager;
 import android.os.Build;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.RemoteMessage;
 
 public class MessageActivity extends AppCompatActivity {
 
@@ -48,6 +50,7 @@ public class MessageActivity extends AppCompatActivity {
                 FirebaseMessaging.getInstance().subscribeToTopic(getString(R.string.default_notification_channel_name));
                 // [END subscribe_topics]
 
+
                 // Log and toast
                 String msg = getString(R.string.msg_subscribed);
                 Log.d(TAG, msg);
@@ -55,17 +58,27 @@ public class MessageActivity extends AppCompatActivity {
             }
         });
 
+
+
         Button logTokenButton = findViewById(R.id.logTokenButton);
         logTokenButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Get token
+                EditText messText;
+                messText = (EditText) findViewById(R.id.editText2);
                 String token = FirebaseInstanceId.getInstance().getToken();
+                String message =  messText.getText().toString();
 
                 // Log and toast
                 String msg = getString(R.string.msg_token_fmt, token);
                 Log.d(TAG, msg);
-                Toast.makeText(MessageActivity.this, msg, Toast.LENGTH_SHORT).show();
+                FirebaseMessaging usermsg = FirebaseMessaging.getInstance();
+                usermsg.send(new RemoteMessage.Builder(token + "@gcm.googleapis.com")
+                        .setMessageId(token)
+                        .addData("my_message", message)
+                        .build());
+                finish();
             }
         });
     }

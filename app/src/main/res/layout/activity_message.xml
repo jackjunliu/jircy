@@ -16,13 +16,13 @@
         android:layout_gravity="center_horizontal"
         android:src="@drawable/firebase_lockup_400" />
 
-    <TextView
-        android:id="@+id/informationTextView"
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center_horizontal"
-        android:text="@string/quickstart_message" />
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/send_msg_button" />
 
     <Button
         android:id="@+id/subscribeButton"
@@ -37,6 +37,6 @@
         android:layout_width="@dimen/standard_field_width"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="@string/log_token" />
+        android:text="@string/button_send" />
 
 </LinearLayout>

@@ -31,6 +31,9 @@ android {
 
 dependencies {
     implementation 'com.android.support:support-v4:27.0.2'
+    implementation 'com.google.firebase:firebase-database:11.8.0'
+    implementation 'com.google.firebase:firebase-config:11.8.0'
+    implementation 'com.google.firebase:firebase-storage:11.8.0'
     androidTestCompile 'com.android.support:support-annotations:27.0.2'
     androidTestCompile 'com.android.support.test:runner:1.0.1'
     androidTestCompile 'com.android.support.test:rules:1.0.1'
