@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.onesignal.OneSignal;
 
 /**
  * Created by jackliu on 2/7/18.
