@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.onesignal.OneSignal;
+//import com.onesignal.OneSignal;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,10 +20,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         //One Signal
-        OneSignal.startInit(this)
-                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
-                .unsubscribeWhenNotificationsAreDisabled(true)
-                .init();
+        //OneSignal.startInit(this)
+                //.inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                //.unsubscribeWhenNotificationsAreDisabled(true)
+                //.init();
 
         //troubleshoot
         //OneSignal.setLogLevel(OneSignal.LOG_LEVEL.DEBUG, OneSignal.LOG_LEVEL.DEBUG);
