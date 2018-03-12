@@ -1,0 +1,18 @@
+language: java
+sudo: required
+
+android:
+  components:
+    - build-tools-26.0.2
+    - android-26
+    - extra
+
+jdk:
+  - oraclejdk8
+  - oraclejdk7
+  - openjdk7
+
+before_script:
+- chmod a+x gradlew
+
+sccript: ./gradlew build

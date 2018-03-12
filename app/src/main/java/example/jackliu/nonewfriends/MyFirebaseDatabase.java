@@ -24,6 +24,14 @@ public class MyFirebaseDatabase {
 
     private String user;
 
+    public String getUser() {
+        return user;
+    }
+
+    public LocationData getLocationData() {
+        return loc;
+    }
+
     public MyFirebaseDatabase(){
         auth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance();
@@ -35,9 +43,8 @@ public class MyFirebaseDatabase {
         loc.lat(coordinates.getLatitude())
                 .lng(coordinates.getLongitude())
                 .timestamp(System.currentTimeMillis() / 1000L);
-        String child = auth.getCurrentUser().getEmail();
         DatabaseReference myRef = database.getReference();
-        myRef.child("location").child(child.substring(0,child.length()-4))
+        myRef.child("location").child(user.substring(0,user.length()-4))
                 .setValue(loc);
     }
 }

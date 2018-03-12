@@ -38,6 +38,7 @@
         InstanceID token to logcat.</string>
     <string name="subscribe_to_news">Subscribe To News</string>
     <string name="log_token">Log Token</string>
+    <string name="sendnotification">Send Notification</string>
 
     <string name="title_activity_map_hybrid">MapActivityHybrid</string>
     <string name="dummy_button">Dummy Button</string>
