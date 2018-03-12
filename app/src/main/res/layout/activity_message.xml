@@ -52,11 +52,11 @@
             android:textColor="@color/input_register" />
     </android.support.design.widget.TextInputLayout>
 
-    <Button
-        android:id="@+id/send_notification"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/sendnotification" />
+    <!--<Button-->
+        <!--android:id="@+id/send_notification"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/sendnotification" />-->
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"

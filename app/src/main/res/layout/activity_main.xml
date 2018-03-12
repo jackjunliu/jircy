@@ -35,16 +35,6 @@
             android:textColor="@android:color/white"
             android:text="@string/send_msg_button" />
 
-        <Button
-            android:id="@+id/sign_out"
-            style="?android:textAppearanceSmall"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@color/colorPrimary"
-            android:text="@string/btn_sign_out"
-            android:textColor="@android:color/white"
-            android:textStyle="bold" />
 
         <Button
             android:id="@+id/notification_button"
@@ -52,7 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@color/btn_notification"
+            android:background="@android:color/darker_gray"
             android:text="@string/btn_notification"
             android:textColor="@android:color/white"
             android:textStyle="bold" />
@@ -63,12 +53,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@color/btn_open_map"
+            android:background="@android:color/darker_gray"
             android:text="Open Map"
             android:textColor="@color/white"
             android:textStyle="bold"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="360dp" />
+
+        <Button
+            android:id="@+id/sign_out"
+            style="?android:textAppearanceSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="#B22222"
+            android:text="@string/btn_sign_out"
+            android:textColor="@android:color/white"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
