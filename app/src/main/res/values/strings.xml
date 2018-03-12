@@ -59,4 +59,6 @@
     <string name="edit_message">Enter a Message</string>
     <string name="title_activity_sent_msg_screen">sentMsgScreen</string>
     <string name="send_msg_button">Send a Message</string>
+    <string name="hint_message">Type Message Here</string>
+    <string name="sendmessage">Send Message</string>
 </resources>

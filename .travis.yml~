@@ -1,5 +1,6 @@
-install: gradle wrapper --gradle-version 4.2
 language: java
+sudo: required
+
 jdk:
   - oraclejdk8
   - oraclejdk7

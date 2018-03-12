@@ -4,8 +4,6 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
@@ -13,9 +11,6 @@ import android.support.v4.app.NotificationCompat;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.Random;
 
 //import android.graphics.Color;
@@ -87,11 +82,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         int notificationId = new Random().nextInt(60000);
 
 
-        Bitmap bitmap = getBitmapfromUrl(remoteMessage.getData().get("image-url"));
+//        Bitmap bitmap = getBitmapfromUrl(remoteMessage.getData().get("image-url"));
 
         Intent likeIntent = new Intent(this,MapsActivity.class);
         likeIntent.putExtra(NOTIFICATION_ID_EXTRA,notificationId);
-        likeIntent.putExtra(IMAGE_URL_EXTRA,remoteMessage.getData().get("image-url"));
+//        likeIntent.putExtra(IMAGE_URL_EXTRA,remoteMessage.getData().get("image-url"));
         PendingIntent likePendingIntent = PendingIntent.getService(this,
                 notificationId+1,likeIntent,PendingIntent.FLAG_ONE_SHOT);
 
@@ -103,36 +98,36 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(this, ADMIN_CHANNEL_ID)
-                        .setLargeIcon(bitmap)
+//                        .setLargeIcon(bitmap)
                         .setSmallIcon(R.mipmap.ic_launcher)
                         .setContentTitle(remoteMessage.getData().get("title"))
-                        .setStyle(new NotificationCompat.BigPictureStyle()
-                                .setSummaryText(remoteMessage.getData().get("message"))
-                                .bigPicture(bitmap))/*Notification with Image*/
                         .setContentText(remoteMessage.getData().get("message"))
                         .setAutoCancel(true)
                         .setSound(defaultSoundUri)
-                        .setContentIntent(pendingIntent);
+                        .setContentIntent(pendingIntent)
+                        .setStyle(new NotificationCompat.BigTextStyle()
+                                .setSummaryText(remoteMessage.getData().get("message")));
+//                                .bigPicture(bitmap))/*Notification with Image*/
 
         notificationManager.notify(notificationId, notificationBuilder.build());
 
 
     }
 
-    public Bitmap getBitmapfromUrl(String imageUrl) {
-        try {
-            URL url = new URL(imageUrl);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setDoInput(true);
-            connection.connect();
-            InputStream input = connection.getInputStream();
-            return BitmapFactory.decodeStream(input);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
+//    public Bitmap getBitmapfromUrl(String imageUrl) {
+//        try {
+//            URL url = new URL(imageUrl);
+//            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+//            connection.setDoInput(true);
+//            connection.connect();
+//            InputStream input = connection.getInputStream();
+//            return BitmapFactory.decodeStream(input);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return null;
+//        }
+//    }
     // [END receive_message]
 
 //    /**

@@ -38,9 +38,9 @@ public class MessageActivity extends AppCompatActivity {
     //declare firebase variable
     private FirebaseAuth auth;
 
-    private EditText SendRecipient;
+    private EditText SendRecipient, MessageBroadcast;
 
-    private Button sendButton;
+    private Button sendButton, sendMessageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,13 +116,130 @@ public class MessageActivity extends AppCompatActivity {
                 SendRecipient = (EditText) findViewById(R.id.send_email_input);
                 //Testing if toast works
                 //Toast.makeText(MessageActivity.this, msg, Toast.LENGTH_SHORT).show();
-                String msg = SendRecipient.getText().toString();
-                emailCheck(msg);
-                sendMessage(msg);
+                String msg = SendRecipient.getText().toString().trim();
+//                emailCheck(msg);
+//                sendNotification(msg);
+            }
+        });
+        sendMessageButton = findViewById(R.id.send_message_now);
+        sendMessageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MessageBroadcast = (EditText) findViewById(R.id.message_input);
+                String message = MessageBroadcast.getText().toString().trim();
+                //get currentuser's location
+                //send it to mapsactivity
+                //post a new spot on the map
+                if (TextUtils.isEmpty(message)) {
+                    Toast.makeText(getApplicationContext(), "Enter a message!", Toast.LENGTH_SHORT).show();
+                } else {
+                    sendMessage(message);
+                }
             }
         });
     }
-    private void sendMessage(final String msg) {
+//    private void sendNotification(final String msg) {
+//        AsyncTask.execute(new Runnable() {
+//            @Override
+//            public void run() {
+//                int SDK_INT = android.os.Build.VERSION.SDK_INT;
+//                if (SDK_INT > 8) {
+//                    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+//                            .permitAll().build();
+//                    StrictMode.setThreadPolicy(policy);
+//                    String send_email;
+//
+//                    //Tests if email exists, if it does, then sends notification to email owner.
+//                    Log.d(TAG, msg);
+//                    if (TextUtils.isEmpty(msg)) {
+//                        Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
+//                        return;
+//                    }
+//                    send_email = msg;
+//
+//                    try {
+//                        String jsonResponse;
+//
+//                        URL url = new URL("https://onesignal.com/api/v1/notifications");
+//                        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+//                        con.setUseCaches(false);
+//                        con.setDoOutput(true);
+//                        con.setDoInput(true);
+//
+//                        con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+//                        //needs unique Authorization api key from onesignal - this is Yoon's
+//                        con.setRequestProperty("Authorization", "Basic OGZjYmE4YWMtZTY2Mi00MTY5LTk0MTYtOWNiZjNmZDJjODhi");
+//                        con.setRequestMethod("POST");
+//
+//                        String strJsonBody = "{"
+//                                //needs unique app_id from OneSignal - this is Yoon's
+//                                + "\"app_id\": \"c9cf3c94-40f2-4f67-aeeb-e83db45aa5f6\","
+//
+//                                + "\"filters\": [{\"field\": \"tag\", \"key\": \"User_ID\", \"relation\": \"=\", \"value\": \"" + send_email + "\"}],"
+//
+//                                + "\"data\": {\"foo\": \"bar\"},"
+//                                + "\"contents\": {\"en\": \"" + messageBox + "\"}"
+//                                + "}";
+//
+//
+//                        System.out.println("strJsonBody:\n" + strJsonBody);
+//
+//                        byte[] sendBytes = strJsonBody.getBytes("UTF-8");
+//                        con.setFixedLengthStreamingMode(sendBytes.length);
+//
+//                        OutputStream outputStream = con.getOutputStream();
+//                        outputStream.write(sendBytes);
+//
+//                        int httpResponse = con.getResponseCode();
+//                        System.out.println("httpResponse: " + httpResponse);
+//
+//                        if (httpResponse >= HttpURLConnection.HTTP_OK
+//                                && httpResponse < HttpURLConnection.HTTP_BAD_REQUEST) {
+//                            Scanner scanner = new Scanner(con.getInputStream(), "UTF-8");
+//                            jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+//                            scanner.close();
+//                        } else {
+//                            Scanner scanner = new Scanner(con.getErrorStream(), "UTF-8");
+//                            jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+//                            scanner.close();
+//                        }
+//                        System.out.println("jsonResponse:\n" + jsonResponse);
+//
+//                    } catch (Throwable t) {
+//                        t.printStackTrace();
+//                    }
+//                }
+//            }
+//        });
+//    }
+    public void emailCheck(final String msg) {
+
+        auth.fetchProvidersForEmail(msg)
+                .addOnCompleteListener(new OnCompleteListener<ProviderQueryResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<ProviderQueryResult> task) {
+                        boolean check = !task.getResult().getProviders().isEmpty();
+
+                        if (!check) {
+                            Toast.makeText(getApplicationContext(), "Email does not exist",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+    }
+
+        private void sendMessage(final String message) {
+        /*
+         Should broadcast a message to users in the area
+         Begin by sending currentUser's location to the map
+         Then we should have a separate page, where we see all those in the area, and their message
+        */
+
+            //update user location
+
+            //send message to users
+
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
@@ -134,12 +251,13 @@ public class MessageActivity extends AppCompatActivity {
                     String send_email;
 
                     //Tests if email exists, if it does, then sends notification to email owner.
-                    Log.d(TAG, msg);
-                    if (TextUtils.isEmpty(msg)) {
-                        Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                    send_email = msg;
+//                    Log.d(TAG, msg);
+//                    if (TextUtils.isEmpty(msg)) {
+//                        Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
+//                        return;
+//                    }
+//                    send_email = msg;
+                    send_email = "jiraiyaliu@gmail.com";
 
                     try {
                         String jsonResponse;
@@ -162,7 +280,7 @@ public class MessageActivity extends AppCompatActivity {
                                 + "\"filters\": [{\"field\": \"tag\", \"key\": \"User_ID\", \"relation\": \"=\", \"value\": \"" + send_email + "\"}],"
 
                                 + "\"data\": {\"foo\": \"bar\"},"
-                                + "\"contents\": {\"en\": \"English Message\"}"
+                                + "\"contents\": {\"en\": \"" + message + "\"}"
                                 + "}";
 
 
@@ -197,23 +315,5 @@ public class MessageActivity extends AppCompatActivity {
         });
     }
 
-    public void emailCheck(final String msg) {
 
-        auth.fetchProvidersForEmail(msg)
-                .addOnCompleteListener(new OnCompleteListener<ProviderQueryResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<ProviderQueryResult> task) {
-                        boolean check = !task.getResult().getProviders().isEmpty();
-
-                        if (!check) {
-                            Toast.makeText(getApplicationContext(), "Email does not exist",
-                                    Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(getApplicationContext(), "Email exists!",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-
-    }
 }

@@ -58,4 +58,22 @@
         android:layout_height="wrap_content"
         android:text="@string/sendnotification" />
 
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/message_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_message"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textColor="@color/input_register" />
+    </android.support.design.widget.TextInputLayout>
+    <Button
+        android:id="@+id/send_message_now"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/sendmessage" />
+
 </LinearLayout>
