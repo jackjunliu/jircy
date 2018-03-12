@@ -40,7 +40,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:background="@color/btn_login_register"
+            android:background="@color/btn_open_map"
             android:text="Send Email"
             android:textColor="@color/white"
             android:textStyle="bold" />
