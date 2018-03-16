@@ -166,6 +166,7 @@ public class MessageActivity extends AppCompatActivity implements LocationListen
     public void onLocationChanged(Location location) {
         latitude = location.getLatitude();
         longitude = location.getLongitude();
+        return;
 
     }
 
