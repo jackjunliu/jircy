@@ -27,6 +27,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.content.Context;
 import android.location.Location;
+import android.content.pm.PackageManager;
 
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -89,6 +90,13 @@ public class MessageActivity extends AppCompatActivity implements LocationListen
                 Object value = getIntent().getExtras().get(key);
                 Log.d(TAG, "Key: " + key + " Value: " + value);
             }
+        }
+
+        //location permission
+        if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_COARSE_LOCATION}, 101);
+
         }
         // [END handle_data_extras]
 
