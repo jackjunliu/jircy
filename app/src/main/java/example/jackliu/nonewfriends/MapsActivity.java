@@ -137,6 +137,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 for (Location location : locationResult.getLocations()) {
                     Log.i(TAG, "onLocationResult: new location sent to database");
                     myFirebaseDatabase.addLocation(location);
+
                 }
             }
         };
@@ -358,6 +359,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private void stopLocationUpdates() {
         mFusedLocationProviderClient.removeLocationUpdates(mLocationCallback);
     }
+
 
     /**
      * Updates the map's UI settings based on whether the user has granted location permission.
