@@ -16,47 +16,19 @@
         android:layout_marginBottom="16dp"
         android:src="@drawable/firebase_lockup_400" />
 
-    <TextView
-        android:id="@+id/informationTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="35dp"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center_horizontal"
-        android:text="@string/quickstart_message" />
-
-    <Button
-        android:id="@+id/subscribeButton"
-        android:layout_width="@dimen/standard_field_width"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:text="@string/subscribe_to_news" />
-
-    <Button
-        android:id="@+id/logTokenButton"
-        android:layout_width="@dimen/standard_field_width"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/log_token" />
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
-            android:id="@+id/send_email_input"
+            android:id="@+id/desired_range"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/hint_email"
-            android:inputType="textEmailAddress"
+            android:hint="@string/range_hint"
+            android:inputType="number"
             android:maxLines="1"
             android:textColor="@color/input_register" />
     </android.support.design.widget.TextInputLayout>
-
-    <Button
-        android:id="@+id/send_notification"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/sendnotification" />
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
