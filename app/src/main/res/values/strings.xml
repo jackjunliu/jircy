@@ -39,10 +39,12 @@
     <string name="subscribe_to_news">Subscribe To News</string>
     <string name="log_token">Log Token</string>
     <string name="sendnotification">Send Notification</string>
+    <string name="Range">Range</string>
 
     <string name="title_activity_map_hybrid">MapActivityHybrid</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="range_hint">Range (positive number in meters)</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_maps_hybrid">MapsHybrid</string>

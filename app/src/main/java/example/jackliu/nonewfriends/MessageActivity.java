@@ -31,7 +31,6 @@ import android.content.pm.PackageManager;
 
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -47,7 +46,7 @@ public class MessageActivity extends AppCompatActivity implements LocationListen
     //declare firebase variable
     private FirebaseAuth auth;
 
-    private EditText SendRecipient, MessageBroadcast;
+    private EditText Radius, MessageBroadcast;
 
     private Button sendButton, sendMessageButton;
 
@@ -55,12 +54,22 @@ public class MessageActivity extends AppCompatActivity implements LocationListen
 
     double latitude, longitude;
 
+    private LocationHelper.GPSCoordinates GPSlocation = new LocationHelper.GPSCoordinates(0,0);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //get firebase instance
         auth = FirebaseAuth.getInstance();
 
         super.onCreate(savedInstanceState);
+        LocationHelper.LocationCallback callback = new LocationHelper.LocationCallback() {
+            @Override
+            public void onNewLocationAvailable(LocationHelper.GPSCoordinates location) {
+                GPSlocation = location;
+                Log.i(TAG, "onNewLocationAvailable: Location updated" + location.longitude + " " + location.latitude);
+            }
+        };
+        LocationHelper.requestSingleUpdate(this, callback, this);
         OneSignal.startInit(this)
                 .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
                 .setNotificationReceivedHandler(new OneSignal.NotificationReceivedHandler() {
@@ -100,21 +109,6 @@ public class MessageActivity extends AppCompatActivity implements LocationListen
         }
         // [END handle_data_extras]
 
-        Button subscribeButton = findViewById(R.id.subscribeButton);
-        subscribeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // [START subscribe_topics]
-                FirebaseMessaging.getInstance().subscribeToTopic(getString(R.string.default_notification_channel_name));
-                // [END subscribe_topics]
-
-                // Log and toast
-                String msg = getString(R.string.msg_subscribed);
-                Log.d(TAG, msg);
-                Toast.makeText(MessageActivity.this, msg, Toast.LENGTH_SHORT).show();
-            }
-        });
-
         Button logTokenButton = findViewById(R.id.logTokenButton);
         logTokenButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,19 +120,6 @@ public class MessageActivity extends AppCompatActivity implements LocationListen
                 String msg = getString(R.string.msg_token_fmt, token);
                 Log.d(TAG, msg);
                 Toast.makeText(MessageActivity.this, msg, Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        sendButton = findViewById(R.id.send_notification);
-        sendButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SendRecipient = (EditText) findViewById(R.id.send_email_input);
-                //Testing if toast works
-                //Toast.makeText(MessageActivity.this, msg, Toast.LENGTH_SHORT).show();
-                String msg = SendRecipient.getText().toString().trim();
-//                emailCheck(msg);
-//                sendNotification(msg);
             }
         });
         sendMessageButton = findViewById(R.id.send_message_now);
@@ -153,7 +134,6 @@ public class MessageActivity extends AppCompatActivity implements LocationListen
                 if (TextUtils.isEmpty(message)) {
                     Toast.makeText(getApplicationContext(), "Enter a message!", Toast.LENGTH_SHORT).show();
                 } else {
-                    getLocation();
                     sendMessage(message);
                 }
             }
@@ -193,80 +173,6 @@ public class MessageActivity extends AppCompatActivity implements LocationListen
 
     }
 
-    //    private void sendNotification(final String msg) {
-//        AsyncTask.execute(new Runnable() {
-//            @Override
-//            public void run() {
-//                int SDK_INT = android.os.Build.VERSION.SDK_INT;
-//                if (SDK_INT > 8) {
-//                    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
-//                            .permitAll().build();
-//                    StrictMode.setThreadPolicy(policy);
-//                    String send_email;
-//
-//                    //Tests if email exists, if it does, then sends notification to email owner.
-//                    Log.d(TAG, msg);
-//                    if (TextUtils.isEmpty(msg)) {
-//                        Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
-//                        return;
-//                    }
-//                    send_email = msg;
-//
-//                    try {
-//                        String jsonResponse;
-//
-//                        URL url = new URL("https://onesignal.com/api/v1/notifications");
-//                        HttpURLConnection con = (HttpURLConnection) url.openConnection();
-//                        con.setUseCaches(false);
-//                        con.setDoOutput(true);
-//                        con.setDoInput(true);
-//
-//                        con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-//                        //needs unique Authorization api key from onesignal - this is Yoon's
-//                        con.setRequestProperty("Authorization", "Basic OGZjYmE4YWMtZTY2Mi00MTY5LTk0MTYtOWNiZjNmZDJjODhi");
-//                        con.setRequestMethod("POST");
-//
-//                        String strJsonBody = "{"
-//                                //needs unique app_id from OneSignal - this is Yoon's
-//                                + "\"app_id\": \"c9cf3c94-40f2-4f67-aeeb-e83db45aa5f6\","
-//
-//                                + "\"filters\": [{\"field\": \"tag\", \"key\": \"User_ID\", \"relation\": \"=\", \"value\": \"" + send_email + "\"}],"
-//
-//                                + "\"data\": {\"foo\": \"bar\"},"
-//                                + "\"contents\": {\"en\": \"" + messageBox + "\"}"
-//                                + "}";
-//
-//
-//                        System.out.println("strJsonBody:\n" + strJsonBody);
-//
-//                        byte[] sendBytes = strJsonBody.getBytes("UTF-8");
-//                        con.setFixedLengthStreamingMode(sendBytes.length);
-//
-//                        OutputStream outputStream = con.getOutputStream();
-//                        outputStream.write(sendBytes);
-//
-//                        int httpResponse = con.getResponseCode();
-//                        System.out.println("httpResponse: " + httpResponse);
-//
-//                        if (httpResponse >= HttpURLConnection.HTTP_OK
-//                                && httpResponse < HttpURLConnection.HTTP_BAD_REQUEST) {
-//                            Scanner scanner = new Scanner(con.getInputStream(), "UTF-8");
-//                            jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
-//                            scanner.close();
-//                        } else {
-//                            Scanner scanner = new Scanner(con.getErrorStream(), "UTF-8");
-//                            jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
-//                            scanner.close();
-//                        }
-//                        System.out.println("jsonResponse:\n" + jsonResponse);
-//
-//                    } catch (Throwable t) {
-//                        t.printStackTrace();
-//                    }
-//                }
-//            }
-//        });
-//    }
     public void emailCheck(final String msg) {
 
         auth.fetchProvidersForEmail(msg)
@@ -290,11 +196,7 @@ public class MessageActivity extends AppCompatActivity implements LocationListen
          Begin by sending currentUser's location to the map
          Then we should have a separate page, where we see all those in the area, and their message
         */
-
-        //update user location
-
         //send message to users
-
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
@@ -303,8 +205,6 @@ public class MessageActivity extends AppCompatActivity implements LocationListen
                     StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
                             .permitAll().build();
                     StrictMode.setThreadPolicy(policy);
-                    String send_email;
-
                     //Tests if email exists, if it does, then sends notification to email owner.
 //                    Log.d(TAG, msg);
 //                    if (TextUtils.isEmpty(msg)) {
@@ -312,9 +212,13 @@ public class MessageActivity extends AppCompatActivity implements LocationListen
 //                        return;
 //                    }
 //                    send_email = msg;
-                    send_email = "jiraiyaliu@gmail.com";
 
                     try {
+                        Radius= (EditText) findViewById(R.id.desired_range);
+                        String rangeMeters = String.valueOf(Integer.parseInt(Radius.getText().toString())).trim();
+                        if (rangeMeters.isEmpty()){
+                            rangeMeters = "2000";
+                        }
                         String jsonResponse;
 
                         URL url = new URL("https://onesignal.com/api/v1/notifications");
@@ -328,19 +232,21 @@ public class MessageActivity extends AppCompatActivity implements LocationListen
                         con.setRequestProperty("Authorization", "Basic OGZjYmE4YWMtZTY2Mi00MTY5LTk0MTYtOWNiZjNmZDJjODhi");
                         con.setRequestMethod("POST");
 
+                        String lat = String.valueOf(LocationHelper.GPSCoordinates.latitude);
+                        String lng = String.valueOf(LocationHelper.GPSCoordinates.longitude);
                         String strJsonBody = "{"
                                 //+ "\"filters\": [{\"field\": \"tag\", \"key\": \"User_ID\", \"relation\": \"=\", \"value\": \"" + send_email + "\"}],"
                                 //needs unique app_id from OneSignal - this is Yoon's
                                 + "\"app_id\": \"c9cf3c94-40f2-4f67-aeeb-e83db45aa5f6\","
 
-                                + "\"filters\": [{\"field\": \"location\", \"radius\": \"20000\", \"lat\": \" " + 34.4133 + "\", \"long\": \"" + 119.8610 + "\"],"
+                                + "\"filters\": [{\"field\": \"location\", \"radius\": \""+ rangeMeters + "\", \"lat\": \"" + lat + "\", \"long\": \"" + lng + "\"}],"
 
-                                + "\"data\": {\"foo\": \"bar\"},"
+//                                + "\"data\": {\"foo\": \"bar\"},"
                                 + "\"contents\": {\"en\": \"" + message + "\"}"
                                 + "}";
 
 
-                        System.out.println("strJsonBody:\n" + strJsonBody);
+                        Log.i(TAG, "run:strJsonBody:\n" + strJsonBody);
 
                         byte[] sendBytes = strJsonBody.getBytes("UTF-8");
                         con.setFixedLengthStreamingMode(sendBytes.length);
@@ -349,7 +255,7 @@ public class MessageActivity extends AppCompatActivity implements LocationListen
                         outputStream.write(sendBytes);
 
                         int httpResponse = con.getResponseCode();
-                        System.out.println("httpResponse: " + httpResponse);
+                        Log.i(TAG, "run:httpResponse: " + httpResponse);
 
                         if (httpResponse >= HttpURLConnection.HTTP_OK
                                 && httpResponse < HttpURLConnection.HTTP_BAD_REQUEST) {
@@ -361,7 +267,7 @@ public class MessageActivity extends AppCompatActivity implements LocationListen
                             jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
                             scanner.close();
                         }
-                        System.out.println("jsonResponse:\n" + jsonResponse);
+                        Log.i(TAG, "run:jsonResponse:\n" + jsonResponse);
 
                     } catch (Throwable t) {
                         t.printStackTrace();
