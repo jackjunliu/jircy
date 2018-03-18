@@ -19,8 +19,6 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.ProviderQueryResult;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.messaging.FirebaseMessaging;
 import com.onesignal.OSNotification;
 import com.onesignal.OneSignal;
 
@@ -59,6 +57,7 @@ public class MessageActivity extends AppCompatActivity {
         };
         LocationHelper.requestSingleUpdate(this, callback, this);
         OneSignal.startInit(this)
+                .autoPromptLocation(true)
                 .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
                 .setNotificationReceivedHandler(new OneSignal.NotificationReceivedHandler() {
                     @Override
