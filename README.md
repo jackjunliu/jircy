@@ -11,6 +11,10 @@ Yoon Lee
 
 Android Application for Mass Messaging and Making Friends
 
+## Status
+Travis Build testing software errors.
+[![Build Status](https://travis-ci.org/jackjunliu/jircy.svg?branch=master)](https://travis-ci.org/jackjunliu/jircy)
+
 ## Building the Application from Android Phone
 ### Device Requirements
 <pre>
@@ -74,7 +78,6 @@ Linux
 
 ## Current Bugs in our Program
 <pre>
-* Email verification partially works, but when you get the email, it will say invalid link
-* Maps API only loads for certain users, as not all users have a developer account
-* The Maps might have updated new location but user is not actually at that location
+* OneSignal sometimes does not record current location and broadcast message might be affected
+* Notification sometimes does not appear for a long duration (~2-3minutes)
 </pre>
