@@ -18,19 +18,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        //One Signal
-        //OneSignal.startInit(this)
-                //.inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
-                //.unsubscribeWhenNotificationsAreDisabled(true)
-                //.init();
-
-        //troubleshoot
-        //OneSignal.setLogLevel(OneSignal.LOG_LEVEL.DEBUG, OneSignal.LOG_LEVEL.DEBUG);
-
-
-        //OneSignal.startInit(this).init();
-
     }
 
     @Override

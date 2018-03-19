@@ -6,7 +6,6 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -15,10 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.ProviderQueryResult;
 import com.onesignal.OSNotification;
 import com.onesignal.OneSignal;
 
@@ -38,7 +34,7 @@ public class MessageActivity extends AppCompatActivity {
 
     private EditText Radius, MessageBroadcast;
 
-    private Button sendButton, sendMessageButton;
+    private Button sendMessageButton;
 
     private LocationHelper.GPSCoordinates GPSlocation = new LocationHelper.GPSCoordinates(0,0);
 
@@ -105,24 +101,6 @@ public class MessageActivity extends AppCompatActivity {
                 }
             }
         });
-    }
-
-
-    public void emailCheck(final String msg) {
-
-        auth.fetchProvidersForEmail(msg)
-                .addOnCompleteListener(new OnCompleteListener<ProviderQueryResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<ProviderQueryResult> task) {
-                        boolean check = !task.getResult().getProviders().isEmpty();
-
-                        if (!check) {
-                            Toast.makeText(getApplicationContext(), "Email does not exist",
-                                    Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
-
     }
 
         private void sendMessage(final String message) {

@@ -82,14 +82,6 @@
             android:name=".MessageActivity"
             android:label="@string/title_activity_message"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".sendMsg"
-            android:label="@string/title_activity_send_msg"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity
-            android:name=".sentMsgScreen"
-            android:label="@string/title_activity_sent_msg_screen"
-            android:theme="@style/AppTheme.NoActionBar"/>
 
         <!--Part of Notification-->
 
