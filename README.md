@@ -9,11 +9,11 @@ Charles Gu
 Yoon Lee
 </pre>
 
+Android Application for Mass Messaging and Making Friends
+
 ## Status
 Travis Build testing software errors.
 [![Build Status](https://travis-ci.org/jackjunliu/jircy.svg?branch=master)](https://travis-ci.org/jackjunliu/jircy)
-
-Android Application for Mass Messaging and Making Friends
 
 ## Building the Application from Android Phone
 ### Device Requirements
