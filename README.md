@@ -9,7 +9,7 @@ Charles Gu
 Yoon Lee
 </pre>
 
-##Status
+## Status
 Travis Build testing software errors.
 [![Build Status](https://travis-ci.org/jackjunliu/jircy.svg?branch=master)](https://travis-ci.org/jackjunliu/jircy)
 
