@@ -13,6 +13,9 @@ import android.support.v4.content.ContextCompat;
 
 /**
  * Created by yoonlee on 3/17/18.
+ *
+ * help from:
+ * https://stackoverflow.com/questions/29657948/get-the-current-location-fast-and-once-in-android
  */
 
 public class LocationHelper {
