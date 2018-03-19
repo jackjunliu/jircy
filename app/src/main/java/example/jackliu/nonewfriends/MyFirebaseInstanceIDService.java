@@ -25,8 +25,6 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
         // Instance ID token to your app server.
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         preferences.edit().putString(FirebaseTokenConstant.FIREBASE_TOKEN, refreshedToken).apply();
-//        sendRegistrationToServer(refreshedToken);
-//        FirebaseMessaging.getInstance().subscribeToTopic(getString(R.string.default_notification_channel_name));
 
     }
 
