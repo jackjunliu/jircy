@@ -38,6 +38,9 @@
         InstanceID token to logcat.</string>
     <string name="subscribe_to_news">Subscribe To News</string>
     <string name="log_token">Log Token</string>
+    <string name="sendnotification">Send Notification</string>
+    <string name="Range">Range</string>
+    <string name="range_hint">Range (positive number in meters)</string>
 
     <string name="title_activity_map_hybrid">MapActivityHybrid</string>
     <string name="dummy_button">Dummy Button</string>
@@ -58,4 +61,6 @@
     <string name="edit_message">Enter a Message</string>
     <string name="title_activity_sent_msg_screen">sentMsgScreen</string>
     <string name="send_msg_button">Send a Message</string>
+    <string name="hint_message">Type Message Here</string>
+    <string name="sendmessage">Send Message</string>
 </resources>

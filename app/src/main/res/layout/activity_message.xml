@@ -7,36 +7,45 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="example.jackliu.nonewfriends.HomeActivity">
+    tools:context="example.jackliu.nonewfriends.MessageActivity">
 
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_height="226dp"
         android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"
         android:src="@drawable/firebase_lockup_400" />
 
-    <TextView
-        android:id="@+id/informationTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center_horizontal"
-        android:text="@string/quickstart_message" />
 
-    <Button
-        android:id="@+id/subscribeButton"
-        android:layout_width="@dimen/standard_field_width"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
-        android:text="@string/subscribe_to_news" />
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/desired_range"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/range_hint"
+            android:inputType="number"
+            android:maxLines="1"
+            android:textColor="@color/input_register" />
+    </android.support.design.widget.TextInputLayout>
 
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/message_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_message"
+            android:inputType="text"
+            android:maxLines="1"
+            android:textColor="@color/input_register" />
+    </android.support.design.widget.TextInputLayout>
     <Button
-        android:id="@+id/logTokenButton"
-        android:layout_width="@dimen/standard_field_width"
+        android:id="@+id/send_message_now"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="@string/log_token" />
+        android:text="@string/sendmessage" />
 
 </LinearLayout>

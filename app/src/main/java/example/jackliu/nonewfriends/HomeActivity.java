@@ -1,16 +1,15 @@
 package example.jackliu.nonewfriends;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.os.Bundle;
-import android.content.Intent;
-import android.content.DialogInterface;
-import android.support.annotation.NonNull;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -27,7 +26,6 @@ public class HomeActivity extends AppCompatActivity {
     private Button sendMsg;
     private FirebaseAuth.AuthStateListener authListener;
     private FirebaseAuth auth;
-    private Button InterestButton;
 
     private static final String TAG = "HomeActivity";
 
@@ -36,6 +34,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         //get firebase auth instance
         auth = FirebaseAuth.getInstance();
@@ -48,39 +47,19 @@ public class HomeActivity extends AppCompatActivity {
         NotificationButton = (Button) findViewById(R.id.notification_button);
         signOut = (Button) findViewById(R.id.sign_out);
         email = (TextView) findViewById(R.id.email);
-        InterestButton = (Button) findViewById(R.id.interests_button);
         sendMsg = (Button) findViewById(R.id.send_message_button);
 
         OpenMapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                //Implement map page here
-//                WebView view = new WebView(HomeActivity.this);
-//                view.getSettings().setJavaScriptEnabled(true);
-//                view.loadUrl("file:///android_asset/index.html");
-//                setContentView(view);
                 startActivity(new Intent(HomeActivity.this, MapsActivity.class));
             }
         });
 
-        InterestButton.setOnClickListener(new View.OnClickListener() {
-                                              @Override
-                                              public void onClick(View v) {
-                                                  startActivity(new Intent(HomeActivity.this, MainInterest.class));
-                                              }
-                                          });
-
         sendMsg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                startActivity(new Intent(HomeActivity.this, sendMsg.class));
-            }
-        });
-
-        sendMsg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v){
-                startActivity(new Intent(HomeActivity.this, sendMsg.class));
+                startActivity(new Intent(HomeActivity.this, MessageActivity.class));
             }
         });
 
